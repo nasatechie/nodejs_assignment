@@ -1,0 +1,13 @@
+{
+    "name": "node_project",
+    "version": "1.0.0",
+    "description": "node.js mentoring program",
+    "author": "Nagasai Pallapotu",
+    "email": "nagasai_pallapotu@epam.com",
+    "license": "ISC",
+    "dependencies": {
+        "commander": "^2.20.0",
+        "esm": "^3.2.25",
+        "through2": "^2.0.3"
+    }
+}
