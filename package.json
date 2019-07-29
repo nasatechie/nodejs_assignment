@@ -1,13 +1,31 @@
 {
-    "name": "node_project",
-    "version": "1.0.0",
-    "description": "node.js mentoring program",
-    "author": "Nagasai Pallapotu",
-    "email": "nagasai_pallapotu@epam.com",
-    "license": "ISC",
-    "dependencies": {
-        "commander": "^2.20.0",
-        "esm": "^3.2.25",
-        "through2": "^2.0.3"
-    }
+  "name": "node_project",
+  "version": "1.0.0",
+  "description": "node.js mentoring program",
+  "main": "app.js",
+  "scripts": {
+    "plain-text-server": "nodemon --exec babel-node src/servers/plain-text-server.js",
+    "html-server": "nodemon --exec babel-node src/servers/html-server.js",
+    "html-server-stream": "nodemon --exec babel-node src/servers/html-server.js --stream",
+    "json-server": "nodemon --exec babel-node src/servers/json-server.js",
+    "echo-server": "nodemon --exec babel-node src/servers/echo-server.js",
+    "express-server": "nodemon --exec babel-node src/express-app/index.js",
+    "test": ""
+  },
+  "author": "Nagasai Pallapotu",
+  "email": "Nagasai_Pallapotu@epam.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "through2": "^3.0.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "commander": "^2.20.0",
+    "express": "^4.17.1"
+  }
 }

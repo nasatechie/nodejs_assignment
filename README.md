@@ -1,4 +1,4 @@
-#### Node JS Mentoring Program
+Node JS Mentoring Program Application
 
 #### Requirements
 
@@ -10,15 +10,27 @@
 
 #### Commands to run the application
 
-- In this task, we need to use the **streams.js** file inside the **utils** directory for executing the commands and passing arguments
+- **List of scripts**
 
-- **node -r esm utils/streams.js [list_of_arguments]**
+  - `npm run plain-text-server`
+  - Starts a http server with `"Content-Type": "text/plain"` and returns `Hello World` as response
 
-  - Use the above command to run the file with a list of arguments to be passed as inputs
-  - List of valid arguments that can be passed
+  - `npm run html-server`
+  - Starts a http server with `"Content-Type": "text/html"` and returns html file content as response
 
-    - **-V, --version** output the version number
-    - **-a, --action <action>** Action to be executed
-    - **-f, --file [file]** File to be processed
-    - **-p, --path [path]** Folder path with css files
-    - **-h, --help** output usage information
+  - `npm run html-server-stream`
+  - Starts a http server with `"Content-Type": "text/html"` and returns html file content as response using streams
+
+  - `npm run json-server`
+  - Starts a http server with `"Content-Type": "application/json"` and returns a sample json response
+
+  - `npm run express-server`
+  - Starts an express application which responds to the below routes
+
+    | URL                       | Method | Action                               |
+    | ------------------------- | ------ | ------------------------------------ |
+    | /api/products             | GET    | Return ALL Products                  |
+    | /api/products/:id         | GET    | Return details of SINGLE Product     |
+    | /api/products/:id/reviews | GET    | Returns reviews for a SINGLE Product |
+    | /api/products             | POST   | Add NEW Product and returns it       |
+    | /api/users                | GET    | Returns ALL Users                    |
