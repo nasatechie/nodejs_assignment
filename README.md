@@ -34,3 +34,28 @@ Node JS Mentoring Program Application
     | /api/products/:id/reviews | GET    | Returns reviews for a SINGLE Product |
     | /api/products             | POST   | Add NEW Product and returns it       |
     | /api/users                | GET    | Returns ALL Users                    |
+
+  - /api/auth - **POST (JWT)**
+    **Headers** - ContentType - `application/json`
+    **Sample Payload**
+
+    ```
+        {
+            "username": "sample_user_name",
+            "password": "sample_pass_word"
+        }
+    ```
+
+  - /api/auth/login - **POST (Local Passport Strategy)**
+    **Headers** - ContentType - `application/json`
+    **Sample Payload**
+    ```
+        {
+            "username": "sample_user_name",
+            "password": "sample_pass_word"
+        }
+    ```
+  **Social Logins**
+  - /api/auth/google
+  - /api/auth/facebook
+  - /api/auth/twitter
