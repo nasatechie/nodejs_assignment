@@ -1,4 +1,4 @@
-import http, { IncomingMessage, ServerResponse } from "http";
+import http from "http";
 
 const PORT_NUMBER = 3000;
 
@@ -17,20 +17,10 @@ const product = {
   ]
 };
 
-/**
- * Function that is called each time the server gets a request
- * @param {IncomingMessage} request
- * @param {ServerResponse} response
- */
-
 const requestHandler = (request, response) => {
   response.writeHead(200, { "Content-Type": "application/json" });
-  response.end(JSON.stringify(product, null, 4));
+  response.end("Json Server\n" + JSON.stringify(product, null, 4));
 };
-
-/**
- * A http server listening for requests on a specified port number
- */
 
 const server = http.createServer(requestHandler);
 server.listen(PORT_NUMBER, err => {

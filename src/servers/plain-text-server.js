@@ -1,21 +1,11 @@
-import http, { IncomingMessage, ServerResponse } from "http";
+import http from "http";
 
 const PORT_NUMBER = 3000;
-
-/**
- * Function that is called each time the server gets a request
- * @param {IncomingMessage} request
- * @param {ServerResponse} response
- */
 
 const requestHandler = (request, response) => {
   response.writeHead(200, { "Content-Type": "text/plain" });
   response.end("Hello World");
 };
-
-/**
- * A http server listening for requests on a specified port number
- */
 
 const server = http.createServer(requestHandler);
 server.listen(PORT_NUMBER, err => {

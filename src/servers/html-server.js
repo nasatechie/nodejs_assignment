@@ -1,4 +1,4 @@
-import http, { IncomingMessage, ServerResponse } from "http";
+import http from "http";
 import through2 from "through2";
 import path from "path";
 import { readFileSync, createReadStream } from "fs";
@@ -7,12 +7,6 @@ import config from "./html-server-meta-config";
 const INDEX_FILE_PATH = path.join(__dirname, "index.html");
 const PORT_NUMBER = 3000;
 const { htmlServerMeta, htmlStreamServerMeta } = config;
-
-/**
- * Function that is called each time the server gets a request
- * @param {IncomingMessage} request
- * @param {ServerResponse} response
- */
 
 const requestHandler = (request, response) => {
   response.writeHead(200, { "Content-Type": "text/html" });
@@ -31,22 +25,12 @@ const requestHandler = (request, response) => {
   }
 };
 
-/**
- * Function which replaces the content inside a given HTML with the values of the **config**
- * @param {string} content: HTML content
- * @param {any} config Config from which the values will be replaced in the HTML content
- */
-
 const interpolateHTML = (content, config) => {
   return content
     .replace("{title}", config.title)
     .replace("{head}", config.head)
     .replace("{message}", config.message);
 };
-
-/**
- * A http server listening for requests on a specified port number
- */
 
 const server = http.createServer(PORT_NUMBER, requestHandler);
 server.listen(PORT_NUMBER, err => {

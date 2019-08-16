@@ -9,8 +9,8 @@ router.get("/", (request, response) => {
   response.redirect("/api/products");
 });
 
+router.use("/api/auth", authRouter);
 router.use("/api/products", productRouter);
 router.use("/api/users", userRouter);
-router.use("/api/auth", authRouter);
 
 export default router;
