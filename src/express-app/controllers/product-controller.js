@@ -1,54 +1,64 @@
-import { productModel } from "../../database/db-props";
-import Joi from "joi";
+import Product from "../models/products";
+
 function getAllProducts(request, response) {
   response.header("Content-Type", "application/json");
-  productModel.findAll().then(products => response.send(products));
+  Product.find().exec((err, products) => {
+    if (err) {
+      response.status(400).json({ error: err.message });
+    }
+    response.json(products);
+  });
 }
 
 function addProduct(request, response) {
   response.header("Content-Type", "application/json");
-  const { name, brand, price, reviews } = request.body;
-
-  const schema = Joi.object().keys({
-    name: Joi.string()
-      .min(3)
-      .max(30)
-      .required(),
-    brand: Joi.string()
-      .min(3)
-      .max(30)
-      .required(),
-    price: Joi.number()
-      .integer()
-      .max(10000)
-      .required(),
-    reviews: Joi.array()
+  const newProduct = new Product(request.body);
+  newProduct.save({ new: true }, (err, newProd) => {
+    if (err) {
+      response.status(400).json({ error: err.message });
+    }
+    response.status(201).json(newProd);
   });
+}
 
-  const productData = {
-    name,
-    brand,
-    price,
-    reviews
-  };
-
-  Joi.validate(productData, schema, function(err, value) {
-    if (!err) {
-      productModel
-        .create(productData)
-        .then(data => {
-          console.log("data is:", data);
-          response.status(201).json({ message: "Product Added Successfully" })
-        })
-        .catch(error => {
-          response
-            .status(400)
-            .json({ error: `${error.errors[0].path} is missing` });
-        });
+function deleteProduct(request, response) {
+  Product.deleteOne({ _id: request.params.id }, (err, result) => {
+    if (err) {
+      response.status(400).json({ error: err.message });
+    }
+    const { deletedCount } = result;
+    if (deletedCount > 0) {
+      response.json({ message: "Deleted Successfully" });
     } else {
-      response.status(400).json({ error: err.details[0].message });
+      response.json({ message: "No record found!" });
     }
   });
 }
 
-export default { getAllProducts, addProduct };
+function getProductDetails(request, response) {
+  response.header("Content-Type", "application/json");
+  Product.findById(request.params.id, (err, product) => {
+    if (err) {
+      response.status(400).json({ error: err.message });
+    }
+    response.json(product);
+  });
+}
+
+function getProductReviews(request, response) {
+  response.header("Content-Type", "application/json");
+  Product.findById(request.params.id, (err, { reviews }) => {
+    if (err) {
+      response.status(400).json({ error: err.message });
+    }
+    response.json(reviews);
+  });
+}
+
+export default {
+  getAllProducts,
+  addProduct,
+  deleteProduct,
+  getProductDetails,
+  getProductReviews
+};
