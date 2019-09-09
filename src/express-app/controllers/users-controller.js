@@ -1,10 +1,10 @@
 import User from "../models/users";
-function getAllUsers(request, response) {
-  response.header("Content-Type", "application/json");
+import { STATUS_MESSAGES } from "../consts/messages";
 
+function getAllUsers(request, response) {
   User.find().exec((err, users) => {
     if (err) {
-      response.status(400).json({ error: err.message });
+      sendInternalServerError(response, { error: err.message });
     }
     response.json(users);
   });
@@ -13,13 +13,13 @@ function getAllUsers(request, response) {
 function deleteUser(request, response) {
   User.deleteOne({ _id: request.params.id }, (err, result) => {
     if (err) {
-      response.status(400).json({ error: err.message });
+      sendInternalServerError(response, { error: err.message });
     }
     const { deletedCount } = result;
     if (deletedCount > 0) {
-      response.json({ message: "Deleted Successfully" });
+      response.json({ message: STATUS_MESSAGES.DELETED_SUCCESSFULLY });
     } else {
-      response.json({ message: "No record found!" });
+      response.json({ message: STATUS_MESSAGES.NO_RECORD_FOUND });
     }
   });
 }

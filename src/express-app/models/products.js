@@ -7,9 +7,5 @@ const productSchema = mongoose.Schema({
   reviews: Array
 });
 
-productSchema.pre("save", function () {
-  this.lastModifiedDate = new Date();
-});
-
 const Product = mongoose.model("Products", productSchema);
 module.exports = Product;

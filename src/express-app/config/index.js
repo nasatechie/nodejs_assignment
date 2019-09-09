@@ -1,10 +1,12 @@
 export const user = {
   name: "nagasai",
   password: "nagasai",
-  username: "nagasai.pallapotu@epam.com"
+  username: "nagasai_pallapotu@epam.com"
 };
 
 export const secret = "secret@123";
+
+export const mongoURL = "mongodb://localhost/task_7";
 
 export const facebook = {
   clientID: "407318286804919",

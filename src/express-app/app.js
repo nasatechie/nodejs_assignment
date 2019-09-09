@@ -3,6 +3,8 @@ import cookieParser from "./middlewares/cookie-parser";
 import queryParser from "./middlewares/query-parser";
 import router from "./routes";
 import passport from "passport";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./config/swagger.json";
 
 import session from "express-session";
 
@@ -22,5 +24,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(router);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

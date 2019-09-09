@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { emailValidator } from "../validators/email-validator";
 
 const userSchema = mongoose.Schema({
   name: String,
@@ -6,17 +7,10 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     validate: {
-      validator: function (email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-      },
+      validator: emailValidator,
       message: "Invalid email format"
     }
   }
-});
-
-userSchema.pre("save", function () {
-  this.lastModifiedDate = new Date();
 });
 
 const User = mongoose.model("Users", userSchema);

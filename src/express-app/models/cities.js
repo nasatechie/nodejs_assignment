@@ -1,21 +1,21 @@
 import mongoose from "mongoose";
 
 const citySchema = mongoose.Schema({
-    name: String,
-    country: String,
-    capital: {
-        type: Boolean,
-        required: true
-    },
-    location: {
-        lat: Number,
-        long: Number
-    },
-    lastModifiedDate: Date
+  name: String,
+  country: String,
+  capital: {
+    type: Boolean,
+    required: true
+  },
+  location: {
+    lat: Number,
+    long: Number
+  },
+  lastModifiedDate: Date
 });
 
-citySchema.pre("save", function () {
-    this.lastModifiedDate = new Date();
+citySchema.pre(["save", "findOneAndUpdate"], function() {
+  this.lastModifiedDate = new Date();
 });
 
 const City = mongoose.model("Cities", citySchema);
